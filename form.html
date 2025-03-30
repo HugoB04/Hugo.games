@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Messagerie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Reset de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Styles généraux */
+        body {
+            font-family: 'Press Start 2P', cursive; /* Police rétro de type pixel */
+            background-color: #111; /* Fond sombre pour donner un style rétro */
+            color: white;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #00ff00; /* Couleur verte pour les liens (style rétro) */
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #ff0000; /* Couleur rouge au survol des liens */
+        }
+
+        /* Emballage principal */
+        .emballage {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Logo du site */
+        .LOGO {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .LOGO img {
+            width: 300px;
+            height: auto;
+        }
+
+        /* Barre de navigation */
+        .CS {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .CS a {
+            font-size: 1.2em;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .CS a:hover {
+            background-color: #444;
+        }
+
+        /* Section principale des messages */
+        .messages {
+            border: 2px solid #444;
+            padding: 20px;
+            background-color: #222;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            max-height: 400px;
+            overflow-y: scroll;
+        }
+
+        .message {
+            padding: 10px;
+            border-bottom: 1px solid #444;
+            margin-bottom: 10px;
+        }
+
+        .message:last-child {
+            border-bottom: none;
+        }
+
+        .author {
+            font-weight: bold;
+            color: #ffcc00; /* Jaune pour les auteurs */
+        }
+
+        .time {
+            font-size: 0.9em;
+            color: gray;
+        }
+
+        .input-message {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            border: 2px solid #444;
+            color: white;
+            border-radius: 5px;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .send-button {
+            background-color: #ffcc00;
+            color: #111;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .send-button:hover {
+            background-color: #ffaa00;
+        }
+
+        /* Pied de page */
+        .PD {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1.2em;
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="emballage">
+        <div class="LOGO">
+            <h1><img src= "images/LogoSiteJeu.png"></h1>
+        </div>
+
+        <div class="CS">
+            <a href="index.html" > accueil </a>
+            <a href="arah.html">Arah.game</a>
+            <a href="form.html">Laissez_un_commentaire</a>
+        </div>
+        
+        <h2 style="text-align: center; color: #ffcc00;">Page de Messagerie</h2>
+        
+        <div class="messages" id="messages">
+            <!-- Les messages seront ajoutés ici -->
+            <div class="message">
+                <p class="author">Hugo.games <span class="time">12:30 PM</span></p>
+                <p>Vous avez des questions, des commentaires ou l'envie de parler à la communauté Hugo.games ? Vous pouvez parler dans cette messagerie.</p>
+            </div>
+        </div>
+
+        <textarea class="input-message" id="messageInput" placeholder="Écrivez un message..."></textarea>
+        <button class="send-button" onclick="sendMessage()">Envoyer</button>
+        
+        <div class="PD">
+            <p>&copy; Recette créée par Hugo.games</p>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var messageText = document.getElementById("messageInput").value;
+            if (messageText.trim() !== "") {
+                var messagesContainer = document.getElementById("messages");
+                var newMessage = document.createElement("div");
+                newMessage.classList.add("message");
+
+                var currentTime = new Date().toLocaleTimeString().slice(0, 5); // Ex. "12:45"
+                newMessage.innerHTML = `<p class="author">Vous <span class="time">${currentTime}</span></p><p>${messageText}</p>`;
+
+                messagesContainer.appendChild(newMessage);
+                document.getElementById("messageInput").value = ""; // Efface le champ de texte
+                messagesContainer.scrollTop = messagesContainer.scrollHeight; // Fait défiler vers le bas
+            }
+        }
+    </script>
+
+</body>
+</html>
